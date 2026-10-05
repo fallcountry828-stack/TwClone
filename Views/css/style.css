@@ -29,7 +29,9 @@
     background-color: #a2deff;
 }
 a{
-    text-decoration:none;  
+    font-size: 13px;
+    text-decoration: none;
+    color: #1af; 
 }
 
 /*
@@ -178,4 +180,66 @@ a{
     width: 25px;
     padding-top: 2px;
     color: #444;
+}
+
+/* ハートが浮き上がるエフェクト */
+.heart {
+    position: fixed;
+    color: #1af;
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp 1.5s forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.8);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-130px) scale(1.5);
+    }
+}
+
+/*
+会員登録画面
+***/
+
+.signup{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 100%;
+    align-items: center;
+    background-color: #8ec4f9;
+    color: #fff;
+}
+.signup .form-signup{
+    max-width: 330px;
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+.signup .logo-white{
+    margin-bottom: 30px;
+    width: 70px;
+}
+.signup h1{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.signup input{
+    margin-bottom: 10px;
+    border-color: #456;
+    color: #fff;
+}
+.signup input:focus{
+    border-color: #1af;
+    background-color: #fff;
+}
+.signup p a{
+    color: #fff;
+}
+.signup .btn{
+    background-color: #3cb0ff;
 }
