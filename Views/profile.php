@@ -1,41 +1,37 @@
+<?php
+$view_tweets = [
+    [
+        'user_id'          => 1,
+        'user_name'        => 'taro',
+        'user_nickname'    => '太郎',
+        'user_icon'        => 'sample-person.jpg',
+        'tweet_body'       => 'こんにちは！',
+        'tweet_image_name' => null,
+        'tweet_created_at' => '2024-04-28 12:00:00',
+        'like_id'          => null,
+        'like_count'       => 0,
+    ],
+];
+?>
+
 <!DOCTYPE html>
+<?php
+//設定画面を詠み込む
+include_once('../config.php');
+//便利な関数を詠み込む
+include_once('../util.php');
+?>
+
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../Views/img/logo-twitterblue.svg" type="image/x-icon">
-
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Views/css/style.css">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <!-- Bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- いいねjs -->
-    <script src="../Views/js/like.js" defer></script>
+    <?php include_once('../Views/common/head.php'); ?>
     <title>プロフィール画面 / Twitterクローン</title>
     <meta name="description" content="プロフィール画面">
 </head>
 
 <body class='home profile text-center'>
     <div class="container">
-        <div class="side">
-            <div class="side-inner">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a href="home.php" class="nav-link"><img src="../Views/img/logo-twitterblue.svg" alt="twitterクローンロゴ" class="icon"></a></li>
-                    <li class="nav-item"><a href="home.php" class="nav-link"><img src="../Views/img/icon-home.svg" alt="ホームアイコン"></a></li>
-                    <li class="nav-item"><a href="search.php" class="nav-link"><img src="../Views/img/icon-search.svg" alt="検索アイコン"></a></li>
-                    <li class="nav-item"><a href="notification.php" class="nav-link"><img src="../Views/img/icon-notification.svg" alt="通知アイコン"></a></li>
-                    <li class="nav-item"><a href="profile.php" class="nav-link"><img src="../Views/img/icon-profile.svg" alt="プロファイルアイコン"></a></li>
-                    <li class="nav-item"><a href="post.php" class="nav-link"><img src="../Views/img/icon-post-tweet-twitterblue.svg" alt="ツイッターブルーアイコン" class="post-tweet"></a></li>
-                    <li class="nav-item my-icon"><img src="../Views/img_uploaded/user/sample-person.jpg" class='js-popover' alt="リストアイコン" 
-                        data-bs-container='body' data-bs-toggle='popover' data-bs-placement='right' data-bs-html='true' data-bs-content="<a href='profile.php'>プロフィール</a><br><a href='sign-out.php'>ログアウト</a>"
-                    ></li>
-                </ul>
-            </div>
-        </div>
+        <?php include_once('../Views/common/side.php'); ?>
         <div class="main">
             <div class="main-header">
                 <h1>太郎</h1>
@@ -45,7 +41,7 @@
             <div class="profile-area">
                 <div class="top">
                     <div class="user">
-                        <img src="../Views/img_uploaded/user/sample-person.jpg" alt="プロフィール画像">
+                        <img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="プロフィール画像">
                     </div>
 
                     <?php if(isset($_GET['user-id'])): ?>
@@ -70,7 +66,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="user">
-                                                <img src="../Views/img_uploaded/user/sample-person.jpg" alt="">
+                                                <img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="mb-1">プロフィール写真</label>
@@ -106,15 +102,19 @@
             </div>
 
             <!-- todo:ツイート一覧 -->
-
+            <?php if (empty($view_tweets)): ?>
+                <p class="p-3">ツイートがありません。</p>
+            <?php else: ?>
+                <div class="tweet-list">
+                    <?php foreach ($view_tweets as $view_tweet){ 
+                        include('../Views/common/tweet.php');
+                    }?>
+                </div>
+            <?php endif; ?>
 
 
         </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            $('.js-popover').popover();
-        })
-    </script>
+    <?php include_once('../Views/common/foot.php'); ?>
 </body>
 </html>
