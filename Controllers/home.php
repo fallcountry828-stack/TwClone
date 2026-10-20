@@ -5,6 +5,10 @@
 include_once '../config.php';
 //便利な関数を詠み込む
 include_once('../util.php');
+
+// ツイートデータ操作モデルを詠み込む
+include_once '../Models/tweets.php';
+
 //ツイート一覧// 
 $view_tweets = [
     [
@@ -41,4 +45,6 @@ if(!$user){
 
 //画面表示
 $view_user = $user;
+//ツイート一覧を取得
+$view_tweets = findTweets($user);
 include_once '../views/home.php';
