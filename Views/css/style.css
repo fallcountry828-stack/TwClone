@@ -240,7 +240,6 @@ a{
 .signup input{
     margin-bottom: 10px;
     border-color: #456;
-    color: #fff;
 }
 .signup input:focus{
     border-color: #1af;

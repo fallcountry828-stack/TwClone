@@ -1,11 +1,3 @@
-
-<?php
-//設定画面を詠み込む
-include_once('../config.php');
-//便利な関数を詠み込む
-include_once('../util.php');
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,6 +12,16 @@ include_once('../util.php');
         <form action="sign-up.php" method="post">
             <img src="<?php echo HOME_URL; ?>Views/img/logo-white.svg" class='logo-white'>
             <h1>アカウントを作る</h1>
+            <!--バリデーションエラーがある場合は表示-->
+            <?php if(!empty($view_error_messages)):?>
+                <div class="alert alert-danger" role="alert">
+                    <?php foreach($view_error_messages as $view_error_message){
+                        echo '*'. $view_error_message . '<br>';
+                    }
+                    ?>
+                </div>  
+            <?php endif;?>
+            
             <input type="text" class='form-control' name="nickname" placeholder='ニックネーム' maxlength="50" required autofocus>
             <input type="text" class='form-control' name="name" placeholder='ユーザー名' maxlength="50" required>
             <input type="email" class='form-control' name="email" placeholder='メールアドレス' maxlength="254" required>
