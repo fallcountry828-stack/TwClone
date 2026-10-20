@@ -1,10 +1,3 @@
-<?php
-//設定画面を詠み込む
-include_once('../config.php');
-//便利な関数を詠み込む
-include_once('../util.php');
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>

@@ -1,7 +1,7 @@
             <!-- ツイート投稿欄 -->
             <div class="tweet-post">
                 <div class="my-icon">
-                    <img src="<?php echo HOME_URL; ?>Views/img_uploaded/user/sample-person.jpg" alt="">
+                    <img src="<?php echo html_escape($view_user['image_path']); ?>" alt="">
                     
                 </div>
                 <div class="input-area">
