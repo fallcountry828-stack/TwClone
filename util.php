@@ -64,3 +64,63 @@ if($text===null){
 return htmlspecialchars($text, ENT_QUOTES,'UTF-8');
 }
 
+/**
+ * ユーザー情報をセッションに保存
+ * 
+ * @param array $user
+ * @return void
+ */
+function saveUserSession(array $user)
+{
+    //セッションを開始していない場合
+    if(session_status()===PHP_SESSION_NONE){
+        //セッション開始
+        session_start();
+    }
+
+    $_SESSION['user']=$user;
+}
+
+/**
+ * ユーザー情報をセッションから削除
+ * 
+ * @return void
+ */
+function deleteUserSession()
+{
+    //セッションを開始していない場合
+    if(session_status()===PHP_SESSION_NONE){
+        //セッション開始
+        session_start();
+    }
+
+    unset($_SESSION['user']);
+}
+
+/**
+ * セッションからユーザー情報を取得
+ * 
+ * @return array|false
+ */
+function getUserSession()
+{
+    //セッションを開始していない場合
+    if(session_status()===PHP_SESSION_NONE){
+        //セッション開始
+        session_start();
+    }
+
+    if(!isset($_SESSION['user'])){
+        //セッションにユーザー情報がない
+        return false;
+    }
+    $user = $_SESSION['user'];
+    
+    //画像のファイル名からファイルのURLを取得
+    if(!isset($user['image_name'])){
+        $user['image_name']=null;
+    }
+    //画像が設定されていない場合は、デフォルトのアイコン画像を表示
+    $user['image_path'] = buildimagepath($user['image_name'],'user');
+    return $user;
+}

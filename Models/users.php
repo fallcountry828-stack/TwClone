@@ -77,4 +77,48 @@ function findUserByEmail(string $email){
     return $user;
 }
 
-    
+/**
+ * emailを元にユーザーを検索してパスワードを確認
+ * @param string $email
+ * @param string $password
+ * @return array|false
+ */
+function findUserAndCheckPassword(string $email,string $password){
+
+    include('../ConnectDB.php');
+    //クエリ作成
+    //入力欄をエスケープ
+    $email = $mysqli->real_escape_string($email);
+
+    $query = 'SELECT * FROM users WHERE email = "' . $email . '"';
+
+    //SQL実行
+    $result = $mysqli->query($query);
+    if(!$result){
+        //mysql処理中にエラー発生
+        echo'エラーメッセージ'.$mysqli->error."\n";
+        $mysqli->close();
+        return false;
+    }
+
+    //ユーザー情報を取得
+    $user = $result->fetch_array(MYSQLI_ASSOC);
+    if(!$user){
+        //ユーザーが存在しない
+        $mysqli->close();
+        return false;
+    }
+
+    //パスワードチェック
+    if(!password_verify($password, $user['password'])){
+        //パスワード不一致
+        $mysqli->close();
+        return false;
+    }
+
+    //DB解放
+    $mysqli->close();
+
+    //結果を返却
+    return $user;
+}    

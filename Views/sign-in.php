@@ -22,9 +22,16 @@ include_once('../util.php');
 
 <body class='signup text-center'>
     <main class='form-signup'>
-        <form action="sign-up.php" method="post">
+        <form action="sign-in.php" method="post">
             <img src="<?php echo HOME_URL; ?>Views/img/logo-white.svg" class='logo-white'>
             <h1>アカウントにログインする</h1>
+
+            <?php if (isset($view_login_result) && $view_login_result === false) : ?>
+                <div class="alert alert-warning text-sm" role="alert">
+                    メールアドレスとパスワードが正しくありません。
+                </div>
+            <?php endif; ?>
+
             <input type="email" class='form-control' name="email" placeholder='メールアドレス' maxlength="254" required autofocus>
             <input type="password" class='form-control' name="password" placeholder='パスワード' minlength="4" maxlength="128" required>
             <button class="w-100 btn btn-lg mt-3 mb-2" type="submit">ログインする</button>
