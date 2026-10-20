@@ -574,10 +574,10 @@ $('.js-practice-like').click(function(e) {
             2: {
                 badge: 'Lesson 2',
                 title: '【Lesson 2】ハートの色（画像）を青色に切り替えよう',
-                desc: 'クリックされたときに、ハートの画像を青色（<code>../Views/img/icon-heart-twitterblue.svg</code>）に変更してみましょう！<br><code>$(this).find('img')</code> と <code>attr()</code> メソッドを使います。',
-                hint: "$(this).find('img').attr('src', '../Views/img/icon-heart-twitterblue.svg');",
-                template: `// 【Lesson 2】画像切り替え\n$('.js-practice-like').click(function(e) {\n    // $(this) はクリックされたボタン自身です\n    // find('img') で中のimg要素を探し、attr() でsrcを変更します\n    $(this).find('img').attr('src', '../Views/img/icon-heart-twitterblue.svg');\n    console.log("ハートを青色に変更しました！");\n});`,
-                answer: `$('.js-practice-like').click(function(e) {\n    $(this).find('img').attr('src', '../Views/img/icon-heart-twitterblue.svg');\n});`
+                desc: 'クリックされたときに、ハートの画像を青色（<code><?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg</code>）に変更してみましょう！<br><code>$(this).find('img')</code> と <code>attr()</code> メソッドを使います。',
+                hint: "$(this).find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg');",
+                template: `// 【Lesson 2】画像切り替え\n$('.js-practice-like').click(function(e) {\n    // $(this) はクリックされたボタン自身です\n    // find('img') で中のimg要素を探し、attr() でsrcを変更します\n    $(this).find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg');\n    console.log("ハートを青色に変更しました！");\n});`,
+                answer: `$('.js-practice-like').click(function(e) {\n    $(this).find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg');\n});`
             },
             3: {
                 badge: 'Lesson 3',
@@ -592,8 +592,8 @@ $('.js-practice-like').click(function(e) {
                 title: '【Lesson 4】いいね付与と解除を切り替えよう（like.jsの再現）',
                 desc: '<code>data-like-id</code> 属性を活用して、1回目のクリックで「いいね付与（青色 ＆ カウント+1）」、2回目のクリックで「いいね解除（グレー ＆ カウント-1）」に切り替える完全なロジックを完成させましょう！',
                 hint: "const likeId = $(this).data('like-id'); で判定し、if (likeId) { 解除 } else { 付与 } と分岐します。",
-                template: `// 【Lesson 4】いいねのトグル（付与/解除）\n$('.js-practice-like').click(function(e) {\n    const thisObj = $(this);\n    const likeId = thisObj.data('like-id');\n    const countObj = thisObj.find('.js-practice-like-count');\n    let count = Number(countObj.text());\n\n    if (likeId) {\n        // いいね解除処理\n        count--;\n        countObj.text(count);\n        thisObj.data('like-id', null);\n        thisObj.find('img').attr('src', '../Views/img/icon-heart.svg');\n        console.log("いいねを解除しました");\n    } else {\n        // いいね付与処理\n        count++;\n        countObj.text(count);\n        thisObj.data('like-id', true);\n        thisObj.find('img').attr('src', '../Views/img/icon-heart-twitterblue.svg');\n        console.log("いいねしました！");\n    }\n});`,
-                answer: `$('.js-practice-like').click(function(e) {\n    const thisObj = $(this);\n    const likeId = thisObj.data('like-id');\n    const countObj = thisObj.find('.js-practice-like-count');\n    let count = Number(countObj.text());\n\n    if (likeId) {\n        count--;\n        countObj.text(count);\n        thisObj.data('like-id', null);\n        thisObj.find('img').attr('src', '../Views/img/icon-heart.svg');\n    } else {\n        count++;\n        countObj.text(count);\n        thisObj.data('like-id', true);\n        thisObj.find('img').attr('src', '../Views/img/icon-heart-twitterblue.svg');\n    }\n});`
+                template: `// 【Lesson 4】いいねのトグル（付与/解除）\n$('.js-practice-like').click(function(e) {\n    const thisObj = $(this);\n    const likeId = thisObj.data('like-id');\n    const countObj = thisObj.find('.js-practice-like-count');\n    let count = Number(countObj.text());\n\n    if (likeId) {\n        // いいね解除処理\n        count--;\n        countObj.text(count);\n        thisObj.data('like-id', null);\n        thisObj.find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart.svg');\n        console.log("いいねを解除しました");\n    } else {\n        // いいね付与処理\n        count++;\n        countObj.text(count);\n        thisObj.data('like-id', true);\n        thisObj.find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg');\n        console.log("いいねしました！");\n    }\n});`,
+                answer: `$('.js-practice-like').click(function(e) {\n    const thisObj = $(this);\n    const likeId = thisObj.data('like-id');\n    const countObj = thisObj.find('.js-practice-like-count');\n    let count = Number(countObj.text());\n\n    if (likeId) {\n        count--;\n        countObj.text(count);\n        thisObj.data('like-id', null);\n        thisObj.find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart.svg');\n    } else {\n        count++;\n        countObj.text(count);\n        thisObj.data('like-id', true);\n        thisObj.find('img').attr('src', '<?php echo HOME_URL; ?>Views/img/icon-heart-twitterblue.svg');\n    }\n});`
             },
             5: {
                 badge: 'Lesson 5',

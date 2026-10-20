@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../Views/img/logo-twitterblue.svg" type="image/x-icon">
-
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Views/css/style.css">
+    <?php include_once('../Views/common/head.php'); ?>
 
     <title>新規登録 / Twitterクローン</title>
     <meta name="description" content="新規登録画面です">
@@ -16,8 +10,18 @@
 <body class='signup text-center'>
     <main class='form-signup'>
         <form action="sign-up.php" method="post">
-            <img src="../Views/img/logo-white.svg" class='logo-white'>
+            <img src="<?php echo HOME_URL; ?>Views/img/logo-white.svg" class='logo-white'>
             <h1>アカウントを作る</h1>
+            <!--バリデーションエラーがある場合は表示-->
+            <?php if(!empty($view_error_messages)):?>
+                <div class="alert alert-danger" role="alert">
+                    <?php foreach($view_error_messages as $view_error_message){
+                        echo '*'. $view_error_message . '<br>';
+                    }
+                    ?>
+                </div>  
+            <?php endif;?>
+            
             <input type="text" class='form-control' name="nickname" placeholder='ニックネーム' maxlength="50" required autofocus>
             <input type="text" class='form-control' name="name" placeholder='ユーザー名' maxlength="50" required>
             <input type="email" class='form-control' name="email" placeholder='メールアドレス' maxlength="254" required>
@@ -26,6 +30,7 @@
             <p class="mt-3 mb-2"><a href="sign-in.php">ログインする</a></p>
         </form>
     </main>
+    <?php include_once('../Views/common/foot.php'); ?>
 </body>
 
 </html>
