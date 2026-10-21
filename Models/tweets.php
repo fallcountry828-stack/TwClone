@@ -40,9 +40,10 @@ function createTweet(array $data)
 /**
  * ツイート一覧を取得する
  * @param array $user
+ * @param string $keyword
  * @return array|false
  */
-function findTweets(array $user)
+function findTweets(array $user,string $keyword=null)
 {
     include '../ConnectDB.php';
 
@@ -73,8 +74,21 @@ function findTweets(array $user)
         -- いいねテーブルを紐づける
         LEFT JOIN likes as L ON L.tweet_id = T.id AND L.status = 'active' AND L.user_id = '$login_user_id'
         WHERE T.status = 'active'
-        ORDER BY T.created_at DESC
     SQL;
+
+    //キーワード検索
+    if(isset($keyword)){
+        //エスケープ
+        $keyword=$mysqli->real_escape_string($keyword);
+        //部分一致検索
+        $query .= ' AND concat(U.nickname,U.name,T.body) LIKE "%' . $keyword . '%"';
+    }
+
+    //新しい順に並び変え
+    $query .= ' ORDER BY T.created_at DESC';
+    //表示件数を50件
+    $query .= ' LIMIT 50';
+
     if($result = $mysqli->query($query)){
         //連想配列を取得
         $response=$result->fetch_all(MYSQLI_ASSOC);
